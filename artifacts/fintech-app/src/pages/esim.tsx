@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Globe, Wifi } from "lucide-react";
-import { EsimPlanTab, ListEsimPlansTab } from "@workspace/api-client-react/src/generated/api.schemas";
 
 export default function Esim() {
   const { data: countriesPlans, isLoading: loadingCountries } = useListEsimPlans({ query: { queryKey: ["esimPlans", "countries"] } });
