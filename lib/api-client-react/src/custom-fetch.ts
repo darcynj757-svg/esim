@@ -356,6 +356,16 @@ export async function customFetch<T = unknown>(
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
+  } else if (!headers.has("authorization")) {
+    // Fallback to localStorage if no getter is configured
+    try {
+      const token = localStorage.getItem("fintech_token");
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+    } catch (e) {
+      // Ignore
+    }
   }
 
   const requestInfo = { method, url: resolveUrl(input) };

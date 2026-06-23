@@ -3,20 +3,30 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Fintech PWA API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
-    description: Health operations
+  - name: auth
+  - name: cards
+  - name: transactions
+  - name: giftcards
+  - name: esim
+  - name: games
+  - name: transfers
+  - name: mobile
+  - name: reviews
+  - name: orders
+  - name: dashboard
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +34,569 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  # AUTH
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+      responses:
+        "201":
+          description: Registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Unauthorized
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkResponse"
+
+  # DASHBOARD
+  /dashboard:
+    get:
+      operationId: getDashboard
+      tags: [dashboard]
+      responses:
+        "200":
+          description: Dashboard summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSummary"
+
+  # CARDS
+  /cards:
+    get:
+      operationId: listCards
+      tags: [cards]
+      responses:
+        "200":
+          description: List of cards
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Card"
+    post:
+      operationId: issueCard
+      tags: [cards]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardInput"
+      responses:
+        "201":
+          description: Card issued
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Card"
+
+  /cards/{id}:
+    get:
+      operationId: getCard
+      tags: [cards]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Card details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Card"
+
+  /cards/{id}/topup:
+    post:
+      operationId: topupCard
+      tags: [cards]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TopupInput"
+      responses:
+        "200":
+          description: Topup initiated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+
+  /cards/{id}/withdraw:
+    post:
+      operationId: withdrawCard
+      tags: [cards]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WithdrawInput"
+      responses:
+        "200":
+          description: Withdraw initiated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+
+  # TRANSACTIONS
+  /transactions:
+    get:
+      operationId: listTransactions
+      tags: [transactions]
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: ["string", "null"]
+        - name: status
+          in: query
+          schema:
+            type: ["string", "null"]
+        - name: cardId
+          in: query
+          schema:
+            type: ["integer", "null"]
+      responses:
+        "200":
+          description: List of transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Transaction"
+
+  # GIFT CARDS
+  /gift-cards:
+    get:
+      operationId: listGiftCards
+      tags: [giftcards]
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: ["string", "null"]
+        - name: country
+          in: query
+          schema:
+            type: ["string", "null"]
+        - name: search
+          in: query
+          schema:
+            type: ["string", "null"]
+      responses:
+        "200":
+          description: Gift cards catalog
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GiftCard"
+
+  /gift-cards/{id}:
+    get:
+      operationId: getGiftCard
+      tags: [giftcards]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Gift card details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GiftCard"
+
+  /gift-cards/categories:
+    get:
+      operationId: listGiftCardCategories
+      tags: [giftcards]
+      responses:
+        "200":
+          description: Available categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+
+  # GAMES
+  /games:
+    get:
+      operationId: listGames
+      tags: [games]
+      parameters:
+        - name: platform
+          in: query
+          schema:
+            type: ["string", "null"]
+        - name: region
+          in: query
+          schema:
+            type: ["string", "null"]
+        - name: search
+          in: query
+          schema:
+            type: ["string", "null"]
+      responses:
+        "200":
+          description: Games catalog
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Game"
+
+  /games/{id}:
+    get:
+      operationId: getGame
+      tags: [games]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Game details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Game"
+
+  # GAME TOP-UP SERVICES
+  /game-services:
+    get:
+      operationId: listGameServices
+      tags: [games]
+      responses:
+        "200":
+          description: List of game top-up services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GameService"
+
+  /game-services/{id}/topup:
+    post:
+      operationId: topupGameService
+      tags: [games]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GameTopupInput"
+      responses:
+        "200":
+          description: Top-up initiated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+
+  # ESIM
+  /esim-plans:
+    get:
+      operationId: listEsimPlans
+      tags: [esim]
+      parameters:
+        - name: tab
+          in: query
+          schema:
+            type: ["string", "null"]
+            enum: ["countries", "regions", "global", null]
+        - name: country
+          in: query
+          schema:
+            type: ["string", "null"]
+      responses:
+        "200":
+          description: eSIM plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EsimPlan"
+
+  /esim-plans/{id}/purchase:
+    post:
+      operationId: purchaseEsim
+      tags: [esim]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Purchase initiated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+
+  # TRANSFERS
+  /transfer-rate:
+    get:
+      operationId: getTransferRate
+      tags: [transfers]
+      parameters:
+        - name: fromCountry
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: toCountry
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: amount
+          in: query
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Rate calculation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransferRate"
+
+  /transfers:
+    get:
+      operationId: listTransfers
+      tags: [transfers]
+      responses:
+        "200":
+          description: Transfer history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Transfer"
+    post:
+      operationId: createTransfer
+      tags: [transfers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferInput"
+      responses:
+        "201":
+          description: Transfer created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transfer"
+
+  /transfer-countries:
+    get:
+      operationId: listTransferCountries
+      tags: [transfers]
+      responses:
+        "200":
+          description: Available countries for transfers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TransferCountry"
+
+  # MOBILE TOP-UP
+  /mobile-operators:
+    get:
+      operationId: listMobileOperators
+      tags: [mobile]
+      parameters:
+        - name: country
+          in: query
+          schema:
+            type: ["string", "null"]
+      responses:
+        "200":
+          description: Mobile operators
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MobileOperator"
+
+  /mobile-topup:
+    post:
+      operationId: mobileTopup
+      tags: [mobile]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MobileTopupInput"
+      responses:
+        "200":
+          description: Top-up order
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+
+  # REVIEWS
+  /reviews:
+    get:
+      operationId: listReviews
+      tags: [reviews]
+      responses:
+        "200":
+          description: Reviews list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Review"
+    post:
+      operationId: createReview
+      tags: [reviews]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewInput"
+      responses:
+        "201":
+          description: Review created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Review"
+
+  # ORDERS
+  /orders:
+    get:
+      operationId: listOrders
+      tags: [orders]
+      responses:
+        "200":
+          description: Order history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Order"
+    post:
+      operationId: createOrder
+      tags: [orders]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderInput"
+      responses:
+        "201":
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +604,452 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    OkResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+      required: [ok]
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        name:
+          type: ["string", "null"]
+        telegramId:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+      required: [id, email, createdAt]
+
+    RegisterInput:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+      required: [email, password]
+
+    LoginInput:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required: [email, password]
+
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        token:
+          type: string
+      required: [user, token]
+
+    Card:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        type:
+          type: string
+          enum: [virtual, plastic]
+        system:
+          type: string
+          enum: [visa, mastercard]
+        numberMasked:
+          type: string
+        balance:
+          type: number
+        currency:
+          type: string
+        status:
+          type: string
+          enum: [active, blocked, pending]
+        createdAt:
+          type: string
+      required: [id, userId, type, system, numberMasked, balance, currency, status, createdAt]
+
+    CardInput:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [virtual, plastic]
+        system:
+          type: string
+          enum: [visa, mastercard]
+        currency:
+          type: string
+      required: [type, system]
+
+    TopupInput:
+      type: object
+      properties:
+        amount:
+          type: number
+        method:
+          type: string
+          enum: [card, usdt, sbp, cash]
+      required: [amount, method]
+
+    WithdrawInput:
+      type: object
+      properties:
+        amount:
+          type: number
+        method:
+          type: string
+          enum: [card, usdt, sbp]
+        destination:
+          type: string
+      required: [amount, method]
+
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        cardId:
+          type: ["integer", "null"]
+        type:
+          type: string
+          enum: [topup, withdraw, payment]
+        method:
+          type: string
+          enum: [card, usdt, sbp, cash]
+        amount:
+          type: number
+        currency:
+          type: string
+        status:
+          type: string
+          enum: [pending, success, failed]
+        description:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+      required: [id, userId, type, method, amount, currency, status, createdAt]
+
+    GiftCard:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        category:
+          type: string
+        country:
+          type: string
+        countryFlag:
+          type: string
+        denominations:
+          type: array
+          items:
+            type: number
+        image:
+          type: string
+        priceRub:
+          type: number
+        popular:
+          type: boolean
+      required: [id, name, category, country, countryFlag, denominations, image, priceRub, popular]
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        icon:
+          type: string
+      required: [id, name, icon]
+
+    Game:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        platform:
+          type: string
+          enum: [steam, xbox, playstation, nintendo, other]
+        region:
+          type: string
+        priceRub:
+          type: number
+        image:
+          type: string
+        description:
+          type: string
+        genre:
+          type: string
+        popular:
+          type: boolean
+      required: [id, name, platform, region, priceRub, image, description, genre, popular]
+
+    GameService:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        image:
+          type: string
+        description:
+          type: string
+        amounts:
+          type: array
+          items:
+            type: number
+        requiresAccountId:
+          type: boolean
+      required: [id, name, image, description, amounts, requiresAccountId]
+
+    GameTopupInput:
+      type: object
+      properties:
+        accountId:
+          type: string
+        amount:
+          type: number
+      required: [amount]
+
+    EsimPlan:
+      type: object
+      properties:
+        id:
+          type: integer
+        country:
+          type: ["string", "null"]
+        countryFlag:
+          type: ["string", "null"]
+        region:
+          type: ["string", "null"]
+        dataGb:
+          type: number
+        days:
+          type: integer
+        priceRub:
+          type: number
+        tab:
+          type: string
+          enum: [countries, regions, global]
+        popular:
+          type: boolean
+      required: [id, dataGb, days, priceRub, tab, popular]
+
+    Transfer:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        fromCountry:
+          type: string
+        toCountry:
+          type: string
+        amount:
+          type: number
+        fee:
+          type: number
+        totalAmount:
+          type: number
+        status:
+          type: string
+          enum: [pending, success, failed]
+        createdAt:
+          type: string
+      required: [id, userId, fromCountry, toCountry, amount, fee, totalAmount, status, createdAt]
+
+    TransferInput:
+      type: object
+      properties:
+        fromCountry:
+          type: string
+        toCountry:
+          type: string
+        amount:
+          type: number
+        recipientName:
+          type: string
+        recipientAccount:
+          type: string
+      required: [fromCountry, toCountry, amount]
+
+    TransferRate:
+      type: object
+      properties:
+        fromCountry:
+          type: string
+        toCountry:
+          type: string
+        amount:
+          type: number
+        fee:
+          type: number
+        feePercent:
+          type: number
+        totalAmount:
+          type: number
+        exchangeRate:
+          type: number
+        receiveCurrency:
+          type: string
+        receiveAmount:
+          type: number
+      required: [fromCountry, toCountry, amount, fee, feePercent, totalAmount, exchangeRate, receiveCurrency, receiveAmount]
+
+    TransferCountry:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        nameRu:
+          type: string
+        flag:
+          type: string
+        currency:
+          type: string
+        direction:
+          type: string
+          enum: [from, to, both]
+      required: [code, name, nameRu, flag, currency, direction]
+
+    MobileOperator:
+      type: object
+      properties:
+        id:
+          type: integer
+        country:
+          type: string
+        countryFlag:
+          type: string
+        operator:
+          type: string
+        logo:
+          type: string
+        amounts:
+          type: array
+          items:
+            type: number
+      required: [id, country, countryFlag, operator, logo, amounts]
+
+    MobileTopupInput:
+      type: object
+      properties:
+        operatorId:
+          type: integer
+        phoneNumber:
+          type: string
+        amount:
+          type: number
+      required: [operatorId, phoneNumber, amount]
+
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+        userName:
+          type: string
+        rating:
+          type: integer
+        text:
+          type: string
+        avatar:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+      required: [id, userName, rating, text, createdAt]
+
+    ReviewInput:
+      type: object
+      properties:
+        userName:
+          type: string
+        rating:
+          type: integer
+        text:
+          type: string
+      required: [userName, rating, text]
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: ["integer", "null"]
+        productId:
+          type: ["integer", "null"]
+        productName:
+          type: string
+        productType:
+          type: string
+          enum: [gift_card, game, game_topup, esim, mobile_topup, transfer]
+        amount:
+          type: number
+        currency:
+          type: string
+        status:
+          type: string
+          enum: [pending, success, failed]
+        createdAt:
+          type: string
+      required: [id, productName, productType, amount, currency, status, createdAt]
+
+    OrderInput:
+      type: object
+      properties:
+        productId:
+          type: integer
+        productType:
+          type: string
+        amount:
+          type: number
+        details:
+          type: object
+          additionalProperties: true
+      required: [productType, amount]
+
+    DashboardSummary:
+      type: object
+      properties:
+        totalCards:
+          type: integer
+        totalBalance:
+          type: number
+        totalTransactions:
+          type: integer
+        recentTransactions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transaction"
+        cards:
+          type: array
+          items:
+            $ref: "#/components/schemas/Card"
+      required: [totalCards, totalBalance, totalTransactions, recentTransactions, cards]
