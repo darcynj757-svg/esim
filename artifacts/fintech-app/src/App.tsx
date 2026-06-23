@@ -16,6 +16,7 @@ import Transfers from "@/pages/transfers";
 import Mobile from "@/pages/mobile";
 import Esim from "@/pages/esim";
 import Reviews from "@/pages/reviews";
+import VpnPage from "@/pages/vpn";
 
 import AccountDashboard from "@/pages/account/dashboard";
 import AccountTopup from "@/pages/account/topup";
@@ -38,6 +39,7 @@ function Router() {
       <Route path="/transfers" component={Transfers} />
       <Route path="/mobile" component={Mobile} />
       <Route path="/esim" component={Esim} />
+      <Route path="/vpn" component={VpnPage} />
       <Route path="/reviews" component={Reviews} />
       
       <Route path="/account" component={AccountDashboard} />

@@ -10,6 +10,42 @@ import { Search } from "lucide-react";
 import { SiSteam, SiPlaystation } from "react-icons/si";
 import { Gamepad2, Monitor } from "lucide-react";
 
+const GENRE_GRADIENTS: Record<string, string> = {
+  RPG:           "from-violet-900 via-purple-800 to-indigo-900",
+  Action:        "from-red-900 via-orange-800 to-yellow-900",
+  FPS:           "from-slate-900 via-zinc-800 to-gray-900",
+  Sports:        "from-green-900 via-emerald-800 to-teal-900",
+  Adventure:     "from-emerald-900 via-teal-800 to-cyan-900",
+  Horror:        "from-stone-900 via-red-950 to-zinc-900",
+  Racing:        "from-blue-900 via-cyan-800 to-sky-900",
+  Fighting:      "from-orange-900 via-red-800 to-rose-900",
+  "Battle Royale": "from-amber-900 via-yellow-800 to-lime-900",
+};
+
+const GENRE_TEXT: Record<string, string> = {
+  RPG:           "text-violet-300",
+  Action:        "text-orange-300",
+  FPS:           "text-zinc-300",
+  Sports:        "text-emerald-300",
+  Adventure:     "text-teal-300",
+  Horror:        "text-red-300",
+  Racing:        "text-cyan-300",
+  Fighting:      "text-rose-300",
+  "Battle Royale": "text-yellow-300",
+};
+
+function getPlatformIcon(plat: string) {
+  switch (plat) {
+    case "steam":        return <SiSteam className="h-4 w-4" />;
+    case "xbox":         return <Monitor className="h-4 w-4" />;
+    case "playstation":  return <SiPlaystation className="h-4 w-4" />;
+    case "nintendo":     return <Gamepad2 className="h-4 w-4" />;
+    default:             return <Gamepad2 className="h-4 w-4" />;
+  }
+}
+
+const platforms = ["steam", "xbox", "playstation", "nintendo"];
+
 export default function Games() {
   const [platform, setPlatform] = useState<string | null>(null);
   const [search, setSearch] = useState("");
@@ -21,18 +57,6 @@ export default function Games() {
     if (search && !g.name.toLowerCase().includes(search.toLowerCase())) return false;
     return true;
   });
-
-  const getPlatformIcon = (plat: string) => {
-    switch (plat) {
-      case 'steam': return <SiSteam className="h-4 w-4" />;
-      case 'xbox': return <Monitor className="h-4 w-4" />;
-      case 'playstation': return <SiPlaystation className="h-4 w-4" />;
-      case 'nintendo': return <Gamepad2 className="h-4 w-4" />;
-      default: return null;
-    }
-  };
-
-  const platforms = ['steam', 'xbox', 'playstation', 'nintendo'];
 
   return (
     <Layout>
@@ -87,34 +111,49 @@ export default function Games() {
                   </Card>
                 ))
               ) : filteredGames?.length ? (
-                filteredGames.map(game => (
-                  <Card key={game.id} className="flex flex-col hover-elevate transition-all overflow-hidden border-border/50">
-                    <div className="aspect-[3/4] w-full relative bg-muted flex items-center justify-center p-0">
-                      {game.image ? (
-                         <img src={game.image} alt={game.name} className="w-full h-full object-cover" />
-                      ) : (
-                        <div className="text-4xl opacity-20 font-bold">{game.name[0]}</div>
-                      )}
-                      <div className="absolute top-2 right-2 bg-background/80 backdrop-blur-md p-1.5 rounded-md">
-                        {getPlatformIcon(game.platform)}
+                filteredGames.map(game => {
+                  const gradient = GENRE_GRADIENTS[game.genre] ?? "from-gray-900 via-slate-800 to-zinc-900";
+                  const textColor = GENRE_TEXT[game.genre] ?? "text-gray-300";
+                  return (
+                    <Card key={game.id} className="flex flex-col hover-elevate transition-all overflow-hidden border-border/50">
+                      <div className={`aspect-[3/4] w-full relative bg-gradient-to-br ${gradient} flex flex-col items-center justify-center p-6`}>
+                        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_50%,white,transparent_70%)]" />
+                        <div className="relative text-center">
+                          <div className={`text-6xl font-black mb-3 opacity-20 ${textColor}`}>
+                            {game.name.split(" ").map((w: string) => w[0]).join("").slice(0, 3)}
+                          </div>
+                          <div className={`text-sm font-bold uppercase tracking-widest ${textColor} opacity-80`}>
+                            {game.genre}
+                          </div>
+                        </div>
+                        <div className="absolute bottom-3 left-3 bg-black/40 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md font-medium">
+                          {game.region}
+                        </div>
+                        <div className="absolute top-2 right-2 bg-black/40 backdrop-blur-md p-1.5 rounded-md text-white">
+                          {getPlatformIcon(game.platform)}
+                        </div>
                       </div>
-                    </div>
-                    <CardHeader className="p-4 pb-2">
-                      <div className="flex justify-between items-start gap-2">
-                        <CardTitle className="text-lg line-clamp-2 leading-tight">{game.name}</CardTitle>
-                      </div>
-                      <CardDescription>{game.genre} • {game.region}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="p-4 pt-2 flex-1 flex flex-col justify-end">
-                      <div className="text-xl font-bold text-primary">
-                        {new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(game.priceRub)}
-                      </div>
-                    </CardContent>
-                    <CardFooter className="p-4 pt-0">
-                      <Button className="w-full">Купить</Button>
-                    </CardFooter>
-                  </Card>
-                ))
+                      <CardHeader className="p-4 pb-2">
+                        <div className="flex justify-between items-start gap-2">
+                          <CardTitle className="text-lg line-clamp-2 leading-tight">{game.name}</CardTitle>
+                        </div>
+                        <CardDescription>{game.genre} • {game.region}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="p-4 pt-2 flex-1">
+                        <p className="text-xs text-muted-foreground line-clamp-2">{game.description}</p>
+                      </CardContent>
+                      <CardContent className="p-4 pt-0 flex items-center justify-between">
+                        <div className="text-xl font-bold text-primary">
+                          {new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 }).format(game.priceRub)}
+                        </div>
+                        {game.popular && <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">Хит</Badge>}
+                      </CardContent>
+                      <CardFooter className="p-4 pt-0">
+                        <Button className="w-full">Купить</Button>
+                      </CardFooter>
+                    </Card>
+                  );
+                })
               ) : (
                 <div className="col-span-full text-center py-12 text-muted-foreground">
                   Игры не найдены.

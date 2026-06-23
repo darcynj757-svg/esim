@@ -470,3 +470,32 @@ export type ListMobileOperatorsParams = {
 country?: string | null;
 };
 
+export type VpnPlanDuration = typeof VpnPlanDuration[keyof typeof VpnPlanDuration];
+
+export const VpnPlanDuration = {
+  monthly: 'monthly',
+  annual: 'annual',
+} as const;
+
+export interface VpnPlan {
+  id: number;
+  name: string;
+  slug: string;
+  duration: VpnPlanDuration;
+  priceRub: number;
+  /** @nullable */
+  originalPriceRub?: number | null;
+  serversCount: number;
+  countries: number;
+  devices: number;
+  speed: string;
+  features: string[];
+  popular: boolean;
+  color: string;
+}
+
+export type ListVpnPlansParams = {
+  /** @nullable */
+  duration?: VpnPlanDuration | null;
+};
+

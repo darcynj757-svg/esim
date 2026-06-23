@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
-import { CreditCard, Gamepad, Gift, Globe, History, LayoutDashboard, LogOut, Menu, Smartphone, Wallet, ArrowRightLeft, MessageSquare } from "lucide-react";
+import { CreditCard, Gamepad, Gift, Globe, History, LayoutDashboard, LogOut, Menu, Smartphone, Wallet, ArrowRightLeft, MessageSquare, Shield } from "lucide-react";
 import { useLogout } from "@workspace/api-client-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
@@ -33,6 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <Link href="/transfers" className="text-sm font-medium transition-colors hover:text-primary">Переводы</Link>
       <Link href="/mobile" className="text-sm font-medium transition-colors hover:text-primary">Связь</Link>
       <Link href="/esim" className="text-sm font-medium transition-colors hover:text-primary">eSIM</Link>
+      <Link href="/vpn" className="text-sm font-medium transition-colors hover:text-primary">UniVPN</Link>
       <Link href="/reviews" className="text-sm font-medium transition-colors hover:text-primary">Отзывы</Link>
     </>
   );
@@ -157,6 +158,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <li><Link href="/gift-cards" className="hover:text-primary transition-colors">Gift-карты</Link></li>
                 <li><Link href="/games" className="hover:text-primary transition-colors">Магазин игр</Link></li>
                 <li><Link href="/esim" className="hover:text-primary transition-colors">eSIM для путешествий</Link></li>
+                <li><Link href="/vpn" className="hover:text-primary transition-colors">UniVPN</Link></li>
               </ul>
             </div>
             <div>

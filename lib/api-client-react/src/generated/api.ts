@@ -37,6 +37,7 @@ import type {
   ListGiftCardsParams,
   ListMobileOperatorsParams,
   ListTransactionsParams,
+  ListVpnPlansParams,
   LoginInput,
   MobileOperator,
   MobileTopupInput,
@@ -48,6 +49,7 @@ import type {
   ReviewInput,
   TopupInput,
   Transaction,
+  VpnPlan,
   Transfer,
   TransferCountry,
   TransferInput,
@@ -2245,4 +2247,70 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getCreateOrderMutationOptions(options));
     }
+
+
+export const getListVpnPlansUrl = (params?: ListVpnPlansParams) => {
+  const normalizedParams = new URLSearchParams();
+  if (params?.duration !== undefined && params.duration !== null) normalizedParams.append('duration', params.duration);
+  const stringifiedParams = normalizedParams.toString();
+  return stringifiedParams.length > 0 ? `/api/vpn-plans?${stringifiedParams}` : `/api/vpn-plans`;
+};
+
+export const listVpnPlans = async (params?: ListVpnPlansParams, options?: RequestInit): Promise<VpnPlan[]> => {
+  return customFetch<VpnPlan[]>(getListVpnPlansUrl(params), { method: 'GET', ...options });
+};
+
+export const getListVpnPlansQueryKey = (params?: ListVpnPlansParams) => [
+  `/api/vpn-plans`, ...(params ? [params] : [])
+] as const;
+
+export const getListVpnPlansQueryOptions = <TData = Awaited<ReturnType<typeof listVpnPlans>>, TError = ErrorType<unknown>>(
+  params?: ListVpnPlansParams,
+  options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof listVpnPlans>>, TError, TData>, request?: SecondParameter<typeof customFetch> }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+  const queryKey = queryOptions?.queryKey ?? getListVpnPlansQueryKey(params);
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof listVpnPlans>>> = ({ signal }) => listVpnPlans(params, { signal, ...requestOptions });
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<Awaited<ReturnType<typeof listVpnPlans>>, TError, TData> & { queryKey: QueryKey };
+};
+
+export type ListVpnPlansQueryResult = NonNullable<Awaited<ReturnType<typeof listVpnPlans>>>;
+export type ListVpnPlansQueryError = ErrorType<unknown>;
+
+export function useListVpnPlans<TData = Awaited<ReturnType<typeof listVpnPlans>>, TError = ErrorType<unknown>>(
+  params?: ListVpnPlansParams,
+  options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof listVpnPlans>>, TError, TData>, request?: SecondParameter<typeof customFetch> }
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getListVpnPlansQueryOptions(params, options);
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  query.queryKey = queryOptions.queryKey;
+  return query;
+}
+
+export const getPurchaseVpnPlanUrl = (id: number) => `/api/vpn-plans/${id}/purchase`;
+
+export const purchaseVpnPlan = async (id: number, options?: RequestInit): Promise<Order> => {
+  return customFetch<Order>(getPurchaseVpnPlanUrl(id), { method: 'POST', ...options });
+};
+
+export const getPurchaseVpnPlanMutationOptions = <TError = ErrorType<unknown>, TContext = unknown>(
+  options?: { mutation?: UseMutationOptions<Awaited<ReturnType<typeof purchaseVpnPlan>>, TError, { id: number }, TContext>, request?: SecondParameter<typeof customFetch> }
+): UseMutationOptions<Awaited<ReturnType<typeof purchaseVpnPlan>>, TError, { id: number }, TContext> => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+  const mutationKey = ['purchaseVpnPlan'];
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof purchaseVpnPlan>>, { id: number }> = (props) => {
+    const { id } = props ?? {};
+    return purchaseVpnPlan(id, requestOptions);
+  };
+  return { mutationKey, mutationFn, ...mutationOptions };
+};
+
+export type PurchaseVpnPlanMutationResult = NonNullable<Awaited<ReturnType<typeof purchaseVpnPlan>>>;
+export type PurchaseVpnPlanMutationError = ErrorType<unknown>;
+
+export const usePurchaseVpnPlan = <TError = ErrorType<unknown>, TContext = unknown>(
+  options?: { mutation?: UseMutationOptions<Awaited<ReturnType<typeof purchaseVpnPlan>>, TError, { id: number }, TContext>, request?: SecondParameter<typeof customFetch> }
+): UseMutationResult<Awaited<ReturnType<typeof purchaseVpnPlan>>, TError, { id: number }, TContext> => {
+  return useMutation(getPurchaseVpnPlanMutationOptions(options));
+};
 
