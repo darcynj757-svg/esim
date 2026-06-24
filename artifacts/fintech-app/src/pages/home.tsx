@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SiNetflix, SiSpotify, SiSteam, SiApple, SiGoogleplay, SiEpicgames, SiNotion, SiYoutube, SiOpenai, SiBookingdotcom } from "react-icons/si";
 import { ArrowRight, CreditCard, Globe, ShieldCheck, Zap, Gamepad, Smartphone, Shield, Network } from "lucide-react";
+import { TiltCard } from "@/components/tilt-card";
 
 const faqs = [
   { q: "Как быстро я получу карту после оплаты?", a: "Виртуальная карта выпускается моментально. Сразу после успешной оплаты в личном кабинете появятся реквизиты карты, и вы сможете начать ей пользоваться." },
@@ -146,17 +147,17 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {mainFeatures.map((f, i) => (
-            <Card key={i} className="bg-muted/20 border-border/50 hover-elevate transition-all">
-              <CardHeader>
+            <TiltCard key={i} className="bg-card border border-border/50 ambient-glow">
+              <div className="p-6 flex flex-col space-y-1.5">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                   <f.icon className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle className="text-xl">{f.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
+                <div className="font-semibold leading-none tracking-tight text-xl">{f.title}</div>
+              </div>
+              <div className="p-6 pt-0">
                 <p className="text-muted-foreground">{f.desc}</p>
-              </CardContent>
-            </Card>
+              </div>
+            </TiltCard>
           ))}
         </div>
       </section>
@@ -179,22 +180,22 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {services.map((s) => (
               <Link key={s.href} href={s.href} className="block">
-                <Card className="h-full hover:border-primary/50 transition-colors bg-gradient-to-br from-background to-muted">
-                  <CardHeader>
+                <TiltCard className="h-full bg-card border border-border/50 hover:border-primary/40 transition-colors ambient-glow" max={5}>
+                  <div className="p-6 flex flex-col space-y-1.5">
                     <div className={`w-12 h-12 rounded-full ${s.iconBg} flex items-center justify-center mb-4 ${s.iconColor}`}>
                       <s.icon className="h-6 w-6" />
                     </div>
-                    <CardTitle className="flex items-center gap-2 flex-wrap">
+                    <div className="font-semibold leading-none tracking-tight flex items-center gap-2 flex-wrap">
                       {s.title}
                       {s.badge && (
                         <span className="text-xs font-normal px-1.5 py-0.5 rounded bg-primary/10 text-primary">
                           {s.badge}
                         </span>
                       )}
-                    </CardTitle>
-                    <CardDescription>{s.desc}</CardDescription>
-                  </CardHeader>
-                </Card>
+                    </div>
+                    <div className="text-sm text-muted-foreground">{s.desc}</div>
+                  </div>
+                </TiltCard>
               </Link>
             ))}
           </div>

@@ -302,6 +302,77 @@
   animation: glass-shine 4s ease-in-out infinite;
 }
 
+/* ─── Depth / floating layers ─── */
+
+/* Cards and panels float above the background */
+.float-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  box-shadow:
+    0 2px  4px  rgba(0,0,0,0.04),
+    0 6px  16px rgba(0,0,0,0.06),
+    0 16px 40px rgba(0,0,0,0.08),
+    0 32px 64px rgba(0,0,0,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.dark .float-card {
+  box-shadow:
+    0 2px  4px  rgba(0,0,0,0.25),
+    0 6px  16px rgba(0,0,0,0.3),
+    0 16px 40px rgba(0,0,0,0.25),
+    0 32px 64px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Glare overlay for tilt */
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+/* Hero elements higher in the stack */
+.float-hero {
+  filter: drop-shadow(0 24px 48px rgba(109,40,255,0.15)) drop-shadow(0 8px 16px rgba(0,0,0,0.12));
+}
+
+/* Nav bar glass depth */
+.nav-depth {
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06),
+    0 4px 24px rgba(0,0,0,0.12),
+    0 8px 40px rgba(0,0,0,0.06);
+}
+
+/* Ambient light ring on bottom of elements */
+.ambient-glow {
+  position: relative;
+}
+.ambient-glow::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -16px;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(109,40,255,0.18) 0%, transparent 70%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+/* Layer depth helpers */
+.depth-0 { transform: translateZ(0px);   }
+.depth-1 { transform: translateZ(10px);  }
+.depth-2 { transform: translateZ(20px);  }
+.depth-3 { transform: translateZ(40px);  }
+
 @layer base {
   * {
     @apply border-border;
