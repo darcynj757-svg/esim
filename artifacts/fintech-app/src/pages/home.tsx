@@ -84,12 +84,7 @@ export default function Home() {
   return (
     <Layout>
       {/* Hero */}
-      <section
-        className="relative overflow-hidden pt-24 pb-32 border-b"
-        style={{
-          background: "linear-gradient(160deg, #0d0820 0%, #080516 35%, #060412 65%, #050310 100%)",
-        }}
-      >
+      <section className="relative overflow-hidden pt-24 pb-32 border-b">
 
         {/* Foreground content */}
         <div className="container relative z-10 px-4 mx-auto text-center">
