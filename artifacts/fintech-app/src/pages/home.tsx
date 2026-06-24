@@ -111,7 +111,7 @@ export default function Home() {
                 className="w-full sm:w-auto h-14 px-8 text-base group relative overflow-hidden"
                 style={{
                   background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%)",
-                  boxShadow: "0 0 32px rgba(124,58,237,0.45), 0 4px 16px rgba(0,0,0,0.4)",
+                  boxShadow: "0 0 32px rgba(124,58,237,0.50), 0 8px 24px rgba(109,40,255,0.30)",
                   border: "1px solid rgba(167,139,250,0.3)",
                 }}
               >
@@ -259,10 +259,10 @@ export default function Home() {
           <Link href="/register">
             <Button
               size="lg"
-              className="h-14 px-10 text-lg shadow-2xl"
+              className="h-14 px-10 text-lg"
               style={{
                 background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%)",
-                boxShadow: "0 0 32px rgba(124,58,237,0.45), 0 4px 16px rgba(0,0,0,0.4)",
+                boxShadow: "0 0 32px rgba(124,58,237,0.50), 0 8px 24px rgba(109,40,255,0.30)",
                 border: "1px solid rgba(167,139,250,0.3)",
               }}
             >
