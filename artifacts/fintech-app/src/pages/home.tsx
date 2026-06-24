@@ -133,7 +133,7 @@ export default function Home() {
       </section>
 
       {/* Brand logos */}
-      <section className="py-16 bg-muted/30 border-b">
+      <section className="py-16 border-b border-white/5">
         <div className="container mx-auto px-4">
           <p className="text-center text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-8">
             Наши карты принимают к оплате
@@ -161,7 +161,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {mainFeatures.map((f, i) => (
-            <TiltCard key={i} className="bg-card border border-border/50 ambient-glow">
+            <TiltCard key={i} className="border border-white/10 ambient-glow">
               <div className="p-6 flex flex-col space-y-1.5">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                   <f.icon className="h-6 w-6 text-primary" />
@@ -177,7 +177,7 @@ export default function Home() {
       </section>
 
       {/* Other Services */}
-      <section className="py-24 bg-muted/30 border-y">
+      <section className="py-24 border-y border-white/5">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
             <div>
@@ -194,7 +194,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {services.map((s) => (
               <Link key={s.href} href={s.href} className="block">
-                <TiltCard className="h-full bg-card border border-border/50 hover:border-primary/40 transition-colors ambient-glow" max={5}>
+                <TiltCard className="h-full border border-white/10 hover:border-violet-500/40 transition-colors ambient-glow" max={5}>
                   <div className="p-6 flex flex-col space-y-1.5">
                     <div className={`w-12 h-12 rounded-full ${s.iconBg} flex items-center justify-center mb-4 ${s.iconColor}`}>
                       <s.icon className="h-6 w-6" />

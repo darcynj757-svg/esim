@@ -135,13 +135,13 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 240 10% 4%;
+  --background: 252 60% 4%;
   --foreground: 0 0% 98%;
-  --border: 240 5% 15%;
+  --border: 252 20% 14%;
   
-  --card: 240 10% 6%;
+  --card: 252 40% 6%;
   --card-foreground: 0 0% 98%;
-  --card-border: 240 5% 15%;
+  --card-border: 252 20% 14%;
   
   --popover: 240 10% 6%;
   --popover-foreground: 0 0% 98%;
@@ -320,6 +320,19 @@
   animation-delay: 1s;
 }
 
+/* ─── Glass card ─── */
+.glass-card {
+  background: rgba(255,255,255,0.04) !important;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-color: rgba(255,255,255,0.10) !important;
+}
+
+.glass-card:hover {
+  background: rgba(255,255,255,0.07) !important;
+  border-color: rgba(255,255,255,0.16) !important;
+}
+
 /* ─── Depth / floating layers ─── */
 
 /* Cards and panels float above the background */
@@ -327,20 +340,21 @@
   transform-style: preserve-3d;
   will-change: transform;
   box-shadow:
-    0 2px  4px  rgba(0,0,0,0.04),
-    0 6px  16px rgba(0,0,0,0.06),
-    0 16px 40px rgba(0,0,0,0.08),
-    0 32px 64px rgba(0,0,0,0.04),
-    inset 0 1px 0 rgba(255,255,255,0.08);
+    0 2px  4px  rgba(0,0,0,0.12),
+    0 6px  18px rgba(0,0,0,0.18),
+    0 18px 44px rgba(0,0,0,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    inset 0 -1px 0 rgba(0,0,0,0.10);
+  transition: box-shadow 0.3s ease, background 0.25s ease, border-color 0.25s ease;
 }
 
-.dark .float-card {
+.float-card:hover {
   box-shadow:
-    0 2px  4px  rgba(0,0,0,0.25),
-    0 6px  16px rgba(0,0,0,0.3),
-    0 16px 40px rgba(0,0,0,0.25),
-    0 32px 64px rgba(0,0,0,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+    0 4px  8px  rgba(0,0,0,0.16),
+    0 10px 28px rgba(0,0,0,0.22),
+    0 24px 56px rgba(109,40,255,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.14),
+    inset 0 -1px 0 rgba(0,0,0,0.12);
 }
 
 /* Glare overlay for tilt */
