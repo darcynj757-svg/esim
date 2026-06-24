@@ -85,9 +85,22 @@ export default function Home() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative overflow-hidden pt-24 pb-32 border-b" style={{ background: "#060412" }}>
+      <section
+        className="relative overflow-hidden pt-24 pb-32 border-b"
+        style={{
+          background: "linear-gradient(160deg, #0d0820 0%, #080516 35%, #060412 65%, #050310 100%)",
+        }}
+      >
         {/* Abstract animated background */}
         <HeroBg />
+
+        {/* Bottom fade to next section */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-32 z-10 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, transparent 0%, rgba(6,4,18,0.7) 60%, rgba(6,4,18,1) 100%)",
+          }}
+        />
 
         {/* Foreground content */}
         <div className="container relative z-10 px-4 mx-auto text-center">
@@ -109,13 +122,40 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href="/cards">
-              <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-base group">
-                Оформить карту
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <Button
+                size="lg"
+                className="w-full sm:w-auto h-14 px-8 text-base group relative overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%)",
+                  boxShadow: "0 0 32px rgba(124,58,237,0.45), 0 4px 16px rgba(0,0,0,0.4)",
+                  border: "1px solid rgba(167,139,250,0.3)",
+                }}
+              >
+                <span className="relative z-10 flex items-center">
+                  Оформить карту
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
               </Button>
             </Link>
             <Link href="/gift-cards">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 text-base border-white/20 text-white/80 bg-white/5 backdrop-blur-md hover:bg-white/10">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto h-14 px-8 text-base text-white/90 backdrop-blur-md hover:text-white transition-all duration-300"
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)",
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.1)";
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.28)";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.06)";
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.18)";
+                }}
+              >
                 Каталог сервисов
               </Button>
             </Link>
