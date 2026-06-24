@@ -210,96 +210,114 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.22) !important;
+  /* Frosted glass base — semi-transparent, not opaque */
+  backdrop-filter: blur(24px) saturate(200%) brightness(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.1);
+  /* Thin light-catching border */
+  border: 1px solid rgba(255,255,255,0.30) !important;
+  border-bottom-color: rgba(255,255,255,0.10) !important;
+  /* Multi-layer shadow: ambient glow + depth + inner highlight */
   box-shadow:
-    0 4px 24px rgba(109,40,255,0.25),
-    0 1px 8px rgba(0,0,0,0.18),
-    inset 0 1.5px 0 rgba(255,255,255,0.45),
-    inset 0 -1px 0 rgba(0,0,0,0.12);
-  transition: box-shadow 0.25s ease, transform 0.2s ease, background 0.2s ease !important;
+    0 0  0  1px rgba(124,58,237,0.15),
+    0 4px 16px rgba(109,40,255,0.30),
+    0 8px 40px rgba(109,40,255,0.15),
+    inset 0 2px 0   rgba(255,255,255,0.55),
+    inset 0 -1px 0  rgba(0,0,0,0.20),
+    inset 1px 0 0   rgba(255,255,255,0.15),
+    inset -1px 0 0  rgba(255,255,255,0.08);
+  transition: box-shadow 0.28s ease, transform 0.22s cubic-bezier(0.34,1.56,0.64,1), filter 0.22s ease !important;
 }
 
+/* Refraction gradient — top-left bright, bottom-right dark */
 .btn-glass::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.28) 0%,
-    rgba(255,255,255,0.08) 45%,
-    rgba(255,255,255,0.0) 60%,
-    rgba(255,255,255,0.04) 100%
-  );
+  background:
+    linear-gradient(
+      140deg,
+      rgba(255,255,255,0.38) 0%,
+      rgba(255,255,255,0.14) 30%,
+      rgba(255,255,255,0.02) 55%,
+      rgba(0,0,0,0.04) 75%,
+      rgba(0,0,0,0.10) 100%
+    );
   pointer-events: none;
   z-index: 1;
   border-radius: inherit;
 }
 
+/* Bottom edge darkening — depth illusion */
 .btn-glass::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.0) 0%,
-    rgba(255,255,255,0.0) 60%,
-    rgba(0,0,0,0.08) 100%
-  );
+  left: 5%;
+  right: 5%;
+  bottom: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.18));
   pointer-events: none;
   z-index: 2;
-  border-radius: inherit;
+  border-radius: 0 0 inherit inherit;
 }
 
 .btn-glass:hover:not(:disabled) {
   box-shadow:
-    0 8px 40px rgba(109,40,255,0.38),
-    0 2px 12px rgba(0,0,0,0.2),
-    inset 0 1.5px 0 rgba(255,255,255,0.55),
-    inset 0 -1px 0 rgba(0,0,0,0.12);
-  transform: translateY(-1px);
+    0 0  0  1px rgba(124,58,237,0.25),
+    0 6px 24px rgba(109,40,255,0.45),
+    0 12px 56px rgba(109,40,255,0.22),
+    inset 0 2px 0   rgba(255,255,255,0.65),
+    inset 0 -1px 0  rgba(0,0,0,0.22),
+    inset 1px 0 0   rgba(255,255,255,0.20),
+    inset -1px 0 0  rgba(255,255,255,0.10);
+  transform: translateY(-2px) scale(1.01);
+  filter: brightness(1.06);
 }
 
 .btn-glass:active:not(:disabled) {
-  transform: translateY(0px);
+  transform: translateY(0) scale(0.985);
   box-shadow:
-    0 2px 12px rgba(109,40,255,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.35),
-    inset 0 -1px 0 rgba(0,0,0,0.1);
+    0 0  0  1px rgba(124,58,237,0.15),
+    0 2px 8px  rgba(109,40,255,0.25),
+    inset 0 1px 0   rgba(255,255,255,0.40),
+    inset 0 2px 8px rgba(0,0,0,0.15);
+  filter: brightness(0.96);
 }
 
 .btn-glass > * {
   position: relative;
-  z-index: 3;
+  z-index: 5;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
-/* ─── Shine sweep animation on btn-glass ─── */
+/* ─── Shine sweep animation ─── */
 @keyframes glass-shine {
-  0%   { left: -80%; opacity: 0; }
-  10%  { opacity: 1; }
-  50%  { left: 130%; opacity: 1; }
-  51%, 100% { opacity: 0; left: 130%; }
+  0%          { left: -100%; opacity: 0; }
+  8%          { opacity: 1; }
+  55%         { left: 130%;  opacity: 0.9; }
+  56%, 100%   { opacity: 0;  left: 130%; }
 }
 
 .btn-glass-shine::before {
   content: '';
   position: absolute;
-  top: -20%;
-  left: -80%;
-  width: 40%;
-  height: 140%;
+  top: -30%;
+  left: -100%;
+  width: 35%;
+  height: 160%;
   background: linear-gradient(
-    100deg,
-    transparent 20%,
-    rgba(255,255,255,0.22) 50%,
-    transparent 80%
+    105deg,
+    transparent 15%,
+    rgba(255,255,255,0.06) 35%,
+    rgba(255,255,255,0.28) 50%,
+    rgba(255,255,255,0.06) 65%,
+    transparent 85%
   );
-  transform: skewX(-20deg);
-  z-index: 4;
-  border-radius: 0;
+  transform: skewX(-18deg);
+  z-index: 6;
   pointer-events: none;
-  animation: glass-shine 4s ease-in-out infinite;
+  animation: glass-shine 5s ease-in-out infinite;
+  animation-delay: 1s;
 }
 
 /* ─── Depth / floating layers ─── */

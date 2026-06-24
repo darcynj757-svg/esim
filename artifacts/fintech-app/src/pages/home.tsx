@@ -6,6 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { SiNetflix, SiSpotify, SiSteam, SiApple, SiGoogleplay, SiEpicgames, SiNotion, SiYoutube, SiOpenai, SiBookingdotcom } from "react-icons/si";
 import { ArrowRight, CreditCard, Globe, ShieldCheck, Zap, Gamepad, Smartphone, Shield, Network } from "lucide-react";
 import { TiltCard } from "@/components/tilt-card";
+import { HeroBg } from "@/components/hero-bg";
 
 const faqs = [
   { q: "Как быстро я получу карту после оплаты?", a: "Виртуальная карта выпускается моментально. Сразу после успешной оплаты в личном кабинете появятся реквизиты карты, и вы сможете начать ей пользоваться." },
@@ -84,36 +85,49 @@ export default function Home() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-background pt-24 pb-32 border-b">
-        <div className="absolute inset-0 bg-grid-slate-200/20 [mask-image:linear-gradient(to_bottom,white,transparent)] dark:bg-grid-slate-800/20" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-[40rem] w-[40rem] bg-primary/20 blur-3xl rounded-full" />
-        </div>
+      <section className="relative overflow-hidden pt-24 pb-32 border-b" style={{ background: "#060412" }}>
+        {/* Abstract animated background */}
+        <HeroBg />
+
+        {/* Foreground content */}
         <div className="container relative z-10 px-4 mx-auto text-center">
-          <Badge className="mb-6 px-4 py-1.5 text-sm bg-primary/10 text-primary hover:bg-primary/20 border-primary/20">
+          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold text-violet-300 mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
             Работаем с картами РФ и СБП
-          </Badge>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 max-w-4xl mx-auto leading-tight">
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 max-w-4xl mx-auto leading-tight text-white">
             Оплачивайте зарубежные сервисы{" "}
-            <span className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
               без ограничений
             </span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+
+          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed">
             Моментальный выпуск виртуальных карт, пополнение Steam, покупка Gift-карт и eSIM. Ваш надёжный мост в мировую финансовую систему.
           </p>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href="/cards">
-              <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-base shadow-lg shadow-primary/25 group">
+              <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-base group">
                 Оформить карту
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
             <Link href="/gift-cards">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 text-base bg-background/50 backdrop-blur-sm">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 text-base border-white/20 text-white/80 bg-white/5 backdrop-blur-md hover:bg-white/10">
                 Каталог сервисов
               </Button>
             </Link>
+          </div>
+
+          {/* Feature pills */}
+          <div className="flex flex-wrap justify-center gap-3 mt-12">
+            {["Мгновенный выпуск", "Visa & Mastercard", "СБП без комиссии", "Crypto пополнение", "150+ стран"].map(pill => (
+              <span key={pill} className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-white/50 backdrop-blur-sm">
+                {pill}
+              </span>
+            ))}
           </div>
         </div>
       </section>
