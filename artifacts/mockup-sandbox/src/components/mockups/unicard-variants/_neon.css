@@ -27,50 +27,57 @@
 .text-glow-cyan {
   text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
 }
+.text-glow-lime {
+  text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
+}
+.text-glow-orange {
+  text-shadow: 0 0 10px #ff6b35, 0 0 20px #ff6b35;
+}
 
 .neon-card {
-  background-color: #0d0d0d;
+  background-color: #111111;
   position: relative;
-  border-top: 2px solid var(--neon-color);
-  box-shadow: inset 0 10px 20px -10px var(--neon-color);
+  border: 1px solid var(--neon-color);
+  box-shadow: inset 0 0 10px -5px var(--neon-color);
   transition: all 0.3s ease;
 }
 .neon-card:hover {
   transform: translateY(-5px);
-  box-shadow: inset 0 10px 30px -10px var(--neon-color), 0 10px 20px -10px var(--neon-color);
+  box-shadow: inset 0 0 20px -5px var(--neon-color), 0 5px 15px -5px var(--neon-color);
 }
 
 .neon-card-pink { --neon-color: #ff2d78; }
 .neon-card-cyan { --neon-color: #00e5ff; }
 .neon-card-lime { --neon-color: #39ff14; }
+.neon-card-orange { --neon-color: #ff6b35; }
 
-.btn-neon-pink {
-  background-color: #ff2d78;
+.btn-neon-cyan {
+  background-color: #00e5ff;
   color: #000;
-  box-shadow: 0 0 10px #ff2d78, 0 0 20px #ff2d78;
+  box-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
   transition: all 0.2s;
 }
-.btn-neon-pink:hover {
-  background-color: #ff4d8d;
-  box-shadow: 0 0 20px #ff2d78, 0 0 40px #ff2d78;
+.btn-neon-cyan:hover {
+  background-color: #33eaff;
+  box-shadow: 0 0 20px #00e5ff, 0 0 40px #00e5ff;
   transform: scale(1.05);
 }
 
-.btn-neon-cyan-outline {
-  border: 1px solid #00e5ff;
-  color: #00e5ff;
-  box-shadow: inset 0 0 5px #00e5ff, 0 0 5px #00e5ff;
+.btn-neon-pink-outline {
+  border: 1px solid #ff2d78;
+  color: #ff2d78;
+  box-shadow: inset 0 0 5px #ff2d78, 0 0 5px #ff2d78;
   background: transparent;
   transition: all 0.2s;
 }
-.btn-neon-cyan-outline:hover {
-  background-color: rgba(0, 229, 255, 0.1);
-  box-shadow: inset 0 0 10px #00e5ff, 0 0 15px #00e5ff;
+.btn-neon-pink-outline:hover {
+  background-color: rgba(255, 45, 120, 0.1);
+  box-shadow: inset 0 0 10px #ff2d78, 0 0 15px #ff2d78;
   transform: scale(1.05);
 }
 
-.gradient-text {
-  background: linear-gradient(90deg, #ff2d78, #00e5ff);
+.gradient-text-cyan-pink {
+  background: linear-gradient(90deg, #00e5ff, #ff2d78);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
