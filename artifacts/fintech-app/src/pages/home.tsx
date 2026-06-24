@@ -6,7 +6,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { SiNetflix, SiSpotify, SiSteam, SiApple, SiGoogleplay, SiEpicgames, SiNotion, SiYoutube, SiOpenai, SiBookingdotcom } from "react-icons/si";
 import { ArrowRight, CreditCard, Globe, ShieldCheck, Zap, Gamepad, Smartphone, Shield, Network } from "lucide-react";
 import { TiltCard } from "@/components/tilt-card";
-import { HeroBg } from "@/components/hero-bg";
 
 const faqs = [
   { q: "Как быстро я получу карту после оплаты?", a: "Виртуальная карта выпускается моментально. Сразу после успешной оплаты в личном кабинете появятся реквизиты карты, и вы сможете начать ей пользоваться." },
@@ -91,16 +90,6 @@ export default function Home() {
           background: "linear-gradient(160deg, #0d0820 0%, #080516 35%, #060412 65%, #050310 100%)",
         }}
       >
-        {/* Abstract animated background */}
-        <HeroBg />
-
-        {/* Bottom fade to next section */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-32 z-10 pointer-events-none"
-          style={{
-            background: "linear-gradient(to bottom, transparent 0%, rgba(6,4,18,0.7) 60%, rgba(6,4,18,1) 100%)",
-          }}
-        />
 
         {/* Foreground content */}
         <div className="container relative z-10 px-4 mx-auto text-center">
