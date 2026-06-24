@@ -181,6 +181,127 @@
   --chart-5: 0 85% 65%;
 }
 
+/* ─── Animated background blobs ─── */
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+  25%  { transform: translate(6%, -12%) scale(1.12) rotate(45deg); }
+  50%  { transform: translate(-4%, 8%) scale(0.92) rotate(90deg); }
+  75%  { transform: translate(8%, 4%) scale(1.06) rotate(135deg); }
+}
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+  25%  { transform: translate(-8%, 6%) scale(1.08) rotate(-60deg); }
+  50%  { transform: translate(5%, -10%) scale(0.94) rotate(-120deg); }
+  75%  { transform: translate(-3%, -4%) scale(1.1) rotate(-180deg); }
+}
+@keyframes blob-drift-3 {
+  0%, 100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+  33%  { transform: translate(10%, 6%) scale(1.15) rotate(30deg); }
+  66%  { transform: translate(-6%, -8%) scale(0.88) rotate(60deg); }
+}
+@keyframes blob-drift-4 {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  40%  { transform: translate(-7%, 10%) scale(1.1); }
+  80%  { transform: translate(4%, -5%) scale(0.95); }
+}
+
+/* ─── Liquid glass button effect ─── */
+.btn-glass {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.22) !important;
+  box-shadow:
+    0 4px 24px rgba(109,40,255,0.25),
+    0 1px 8px rgba(0,0,0,0.18),
+    inset 0 1.5px 0 rgba(255,255,255,0.45),
+    inset 0 -1px 0 rgba(0,0,0,0.12);
+  transition: box-shadow 0.25s ease, transform 0.2s ease, background 0.2s ease !important;
+}
+
+.btn-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.28) 0%,
+    rgba(255,255,255,0.08) 45%,
+    rgba(255,255,255,0.0) 60%,
+    rgba(255,255,255,0.04) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.btn-glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.0) 0%,
+    rgba(255,255,255,0.0) 60%,
+    rgba(0,0,0,0.08) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+.btn-glass:hover:not(:disabled) {
+  box-shadow:
+    0 8px 40px rgba(109,40,255,0.38),
+    0 2px 12px rgba(0,0,0,0.2),
+    inset 0 1.5px 0 rgba(255,255,255,0.55),
+    inset 0 -1px 0 rgba(0,0,0,0.12);
+  transform: translateY(-1px);
+}
+
+.btn-glass:active:not(:disabled) {
+  transform: translateY(0px);
+  box-shadow:
+    0 2px 12px rgba(109,40,255,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.35),
+    inset 0 -1px 0 rgba(0,0,0,0.1);
+}
+
+.btn-glass > * {
+  position: relative;
+  z-index: 3;
+}
+
+/* ─── Shine sweep animation on btn-glass ─── */
+@keyframes glass-shine {
+  0%   { left: -80%; opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { left: 130%; opacity: 1; }
+  51%, 100% { opacity: 0; left: 130%; }
+}
+
+.btn-glass-shine::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -80%;
+  width: 40%;
+  height: 140%;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255,255,255,0.22) 50%,
+    transparent 80%
+  );
+  transform: skewX(-20deg);
+  z-index: 4;
+  border-radius: 0;
+  pointer-events: none;
+  animation: glass-shine 4s ease-in-out infinite;
+}
+
 @layer base {
   * {
     @apply border-border;

@@ -49,7 +49,68 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col relative">
+      {/* ── Animated background blobs ── */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10" aria-hidden="true">
+        {/* Primary violet blob */}
+        <div
+          className="absolute rounded-full opacity-[0.12] dark:opacity-[0.09]"
+          style={{
+            width: "600px", height: "600px",
+            top: "-10%", left: "-8%",
+            background: "radial-gradient(circle, hsl(255,85%,65%) 0%, hsl(270,80%,55%) 50%, transparent 70%)",
+            filter: "blur(60px)",
+            animation: "blob-drift-1 22s ease-in-out infinite",
+            willChange: "transform",
+          }}
+        />
+        {/* Blue blob */}
+        <div
+          className="absolute rounded-full opacity-[0.10] dark:opacity-[0.08]"
+          style={{
+            width: "500px", height: "500px",
+            top: "20%", right: "-5%",
+            background: "radial-gradient(circle, hsl(220,85%,65%) 0%, hsl(200,90%,55%) 50%, transparent 70%)",
+            filter: "blur(55px)",
+            animation: "blob-drift-2 28s ease-in-out infinite",
+            willChange: "transform",
+          }}
+        />
+        {/* Cyan blob */}
+        <div
+          className="absolute rounded-full opacity-[0.08] dark:opacity-[0.06]"
+          style={{
+            width: "450px", height: "450px",
+            bottom: "10%", left: "25%",
+            background: "radial-gradient(circle, hsl(180,85%,55%) 0%, hsl(200,80%,60%) 50%, transparent 70%)",
+            filter: "blur(50px)",
+            animation: "blob-drift-3 19s ease-in-out infinite",
+            willChange: "transform",
+          }}
+        />
+        {/* Pink accent blob */}
+        <div
+          className="absolute rounded-full opacity-[0.07] dark:opacity-[0.05]"
+          style={{
+            width: "380px", height: "380px",
+            bottom: "30%", right: "15%",
+            background: "radial-gradient(circle, hsl(300,70%,65%) 0%, hsl(260,80%,60%) 50%, transparent 70%)",
+            filter: "blur(48px)",
+            animation: "blob-drift-4 25s ease-in-out infinite",
+            willChange: "transform",
+          }}
+        />
+        {/* Noise texture overlay for glass depth */}
+        <div
+          className="absolute inset-0 opacity-[0.018] dark:opacity-[0.035]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "128px 128px",
+          }}
+        />
+      </div>
+
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-6">
