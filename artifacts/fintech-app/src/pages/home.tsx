@@ -263,15 +263,22 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-to-br from-primary to-blue-600 text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-slate-200/20 [mask-image:linear-gradient(to_bottom,white,transparent)] opacity-20" />
+      <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Готовы к оплате без границ?</h2>
-          <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto mb-10">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
             Зарегистрируйтесь сейчас и выпустите свою первую виртуальную карту за 2 минуты.
           </p>
           <Link href="/register">
-            <Button size="lg" variant="secondary" className="h-14 px-10 text-lg text-primary shadow-2xl">
+            <Button
+              size="lg"
+              className="h-14 px-10 text-lg shadow-2xl"
+              style={{
+                background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%)",
+                boxShadow: "0 0 32px rgba(124,58,237,0.45), 0 4px 16px rgba(0,0,0,0.4)",
+                border: "1px solid rgba(167,139,250,0.3)",
+              }}
+            >
               Создать аккаунт
             </Button>
           </Link>
