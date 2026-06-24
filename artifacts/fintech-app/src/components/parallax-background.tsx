@@ -68,10 +68,10 @@ export function ParallaxBackground() {
       className="fixed inset-0 pointer-events-none overflow-hidden -z-10"
       aria-hidden="true"
     >
-      {/* 3 blobs instead of 6 — fewer GPU compositing layers */}
+      {/* Dark-mode blobs */}
       <div
         ref={setBlob(0, -16, -12)}
-        className="absolute"
+        className="absolute dark:block hidden"
         style={{
           width: 680, height: 680,
           top: "-15%", left: "-12%",
@@ -82,7 +82,7 @@ export function ParallaxBackground() {
       />
       <div
         ref={setBlob(1, 20, 14)}
-        className="absolute"
+        className="absolute dark:block hidden"
         style={{
           width: 540, height: 540,
           top: "15%", right: "-8%",
@@ -93,12 +93,47 @@ export function ParallaxBackground() {
       />
       <div
         ref={setBlob(2, -30, 22)}
-        className="absolute"
+        className="absolute dark:block hidden"
         style={{
           width: 380, height: 380,
           bottom: "10%", left: "22%",
           background: "radial-gradient(circle, hsl(180 85% 55% / 0.35) 0%, hsl(200 80% 60% / 0.15) 45%, transparent 70%)",
           filter: "blur(55px)",
+          willChange: "transform",
+        }}
+      />
+
+      {/* Light-mode blobs — softer, more pastel */}
+      <div
+        ref={setBlob(3, -16, -12)}
+        className="absolute dark:hidden block"
+        style={{
+          width: 680, height: 680,
+          top: "-15%", left: "-12%",
+          background: "radial-gradient(circle, hsl(255 80% 75% / 0.18) 0%, hsl(270 70% 65% / 0.08) 45%, transparent 70%)",
+          filter: "blur(80px)",
+          willChange: "transform",
+        }}
+      />
+      <div
+        ref={setBlob(4, 20, 14)}
+        className="absolute dark:hidden block"
+        style={{
+          width: 540, height: 540,
+          top: "15%", right: "-8%",
+          background: "radial-gradient(circle, hsl(220 85% 70% / 0.15) 0%, hsl(200 90% 65% / 0.07) 45%, transparent 70%)",
+          filter: "blur(75px)",
+          willChange: "transform",
+        }}
+      />
+      <div
+        ref={setBlob(5, -30, 22)}
+        className="absolute dark:hidden block"
+        style={{
+          width: 380, height: 380,
+          bottom: "10%", left: "22%",
+          background: "radial-gradient(circle, hsl(180 75% 60% / 0.12) 0%, hsl(200 70% 65% / 0.05) 45%, transparent 70%)",
+          filter: "blur(65px)",
           willChange: "transform",
         }}
       />

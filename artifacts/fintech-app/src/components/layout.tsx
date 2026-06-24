@@ -53,16 +53,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen flex-col relative">
       <ParallaxBackground />
 
-      <header
-        className="sticky top-0 z-50 w-full nav-depth"
-        style={{
-          background: "rgba(10, 6, 30, 0.35)",
-          backdropFilter: "blur(24px) saturate(180%)",
-          WebkitBackdropFilter: "blur(24px) saturate(180%)",
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
-          boxShadow: "0 4px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06)",
-        }}
-      >
+      <header className="sticky top-0 z-50 w-full nav-depth backdrop-blur-2xl border-b bg-white/60 border-black/[0.08] shadow-sm dark:bg-[rgba(10,6,30,0.4)] dark:border-white/[0.08] dark:shadow-none" style={{ WebkitBackdropFilter: "blur(24px) saturate(180%)" }}>
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-6">
             <Logo />

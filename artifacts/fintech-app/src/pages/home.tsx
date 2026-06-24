@@ -88,19 +88,19 @@ export default function Home() {
 
         {/* Foreground content */}
         <div className="container relative z-10 px-4 mx-auto text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold text-violet-300 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold text-violet-600 dark:text-violet-300 mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-violet-500 dark:bg-violet-400 animate-pulse" />
             Работаем с картами РФ и СБП
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 max-w-4xl mx-auto leading-tight text-white">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 max-w-4xl mx-auto leading-tight text-foreground">
             Оплачивайте зарубежные сервисы{" "}
-            <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-violet-600 via-blue-500 to-cyan-500 dark:from-violet-400 dark:via-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
               без ограничений
             </span>
           </h1>
 
-          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
             Моментальный выпуск виртуальных карт, пополнение Steam, покупка Gift-карт и eSIM. Ваш надёжный мост в мировую финансовую систему.
           </p>
 
@@ -125,20 +125,7 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="outline"
-                className="w-full sm:w-auto h-14 px-8 text-base text-white/90 backdrop-blur-md hover:text-white transition-all duration-300"
-                style={{
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)",
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.1)";
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.28)";
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.06)";
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.18)";
-                }}
+                className="w-full sm:w-auto h-14 px-8 text-base backdrop-blur-md transition-all duration-300 bg-black/5 border-black/15 text-foreground hover:bg-black/10 dark:bg-white/6 dark:border-white/18 dark:hover:bg-white/10"
               >
                 Каталог сервисов
               </Button>
@@ -148,7 +135,7 @@ export default function Home() {
           {/* Feature pills */}
           <div className="flex flex-wrap justify-center gap-3 mt-12">
             {["Мгновенный выпуск", "Visa & Mastercard", "СБП без комиссии", "Crypto пополнение", "150+ стран"].map(pill => (
-              <span key={pill} className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-white/50 backdrop-blur-sm">
+              <span key={pill} className="px-3 py-1 rounded-full text-xs font-medium bg-black/5 border border-black/10 text-muted-foreground backdrop-blur-sm dark:bg-white/5 dark:border-white/10">
                 {pill}
               </span>
             ))}
