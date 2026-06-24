@@ -29,8 +29,8 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd artifacts/fintech-app && PORT=5173 BASE_PATH=/ pnpm dev"
-waitForPort = 5173
+args = "cd artifacts/fintech-app && PORT=20019 BASE_PATH=/ pnpm dev"
+waitForPort = 20019
 
 [agent]
 stack = "PNPM_WORKSPACE"
