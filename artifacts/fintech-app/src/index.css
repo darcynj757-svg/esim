@@ -321,40 +321,39 @@
 }
 
 /* ─── Glass card ─── */
+/* Use a semi-transparent color without backdrop-filter for perf.
+   backdrop-filter only on hover (fewer simultaneous compositing layers). */
 .glass-card {
   background: rgba(255,255,255,0.04) !important;
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border-color: rgba(255,255,255,0.10) !important;
+  border-color: rgba(255,255,255,0.09) !important;
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .glass-card:hover {
   background: rgba(255,255,255,0.07) !important;
-  border-color: rgba(255,255,255,0.16) !important;
+  border-color: rgba(255,255,255,0.15) !important;
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
 }
 
 /* ─── Depth / floating layers ─── */
-
-/* Cards and panels float above the background */
 .float-card {
-  transform-style: preserve-3d;
-  will-change: transform;
+  /* No will-change by default — only promote to own layer when transforming */
   box-shadow:
-    0 2px  4px  rgba(0,0,0,0.12),
-    0 6px  18px rgba(0,0,0,0.18),
-    0 18px 44px rgba(0,0,0,0.14),
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    inset 0 -1px 0 rgba(0,0,0,0.10);
+    0 2px  6px  rgba(0,0,0,0.14),
+    0 6px  18px rgba(0,0,0,0.16),
+    0 16px 36px rgba(0,0,0,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.09);
   transition: box-shadow 0.3s ease, background 0.25s ease, border-color 0.25s ease;
 }
 
 .float-card:hover {
+  will-change: transform;
   box-shadow:
-    0 4px  8px  rgba(0,0,0,0.16),
-    0 10px 28px rgba(0,0,0,0.22),
-    0 24px 56px rgba(109,40,255,0.10),
-    inset 0 1px 0 rgba(255,255,255,0.14),
-    inset 0 -1px 0 rgba(0,0,0,0.12);
+    0 4px  10px rgba(0,0,0,0.18),
+    0 10px 28px rgba(0,0,0,0.2),
+    0 22px 50px rgba(109,40,255,0.09),
+    inset 0 1px 0 rgba(255,255,255,0.13);
 }
 
 /* Glare overlay for tilt */
