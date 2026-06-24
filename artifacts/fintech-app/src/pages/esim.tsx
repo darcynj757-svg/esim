@@ -42,7 +42,7 @@ export default function Esim() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {plans.map(plan => (
-          <Card key={plan.id} className="flex flex-col relative overflow-hidden hover-elevate border-border/50">
+          <Card key={plan.id} className="glass-card flex flex-col relative overflow-hidden hover-elevate">
             {plan.popular && (
               <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs px-3 py-1 font-semibold rounded-bl-lg z-10">
                 Популярный

@@ -115,7 +115,7 @@ export default function Games() {
                   const gradient = GENRE_GRADIENTS[game.genre] ?? "from-gray-900 via-slate-800 to-zinc-900";
                   const textColor = GENRE_TEXT[game.genre] ?? "text-gray-300";
                   return (
-                    <Card key={game.id} className="flex flex-col hover-elevate transition-all overflow-hidden border-border/50">
+                    <Card key={game.id} className="glass-card flex flex-col hover-elevate transition-all overflow-hidden">
                       <div className={`aspect-[3/4] w-full relative bg-gradient-to-br ${gradient} flex flex-col items-center justify-center p-6`}>
                         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_50%,white,transparent_70%)]" />
                         <div className="relative text-center">

@@ -87,7 +87,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((f, i) => (
-            <Card key={i} className="bg-muted/20 border-border/50 hover-elevate transition-all">
+            <Card key={i} className="glass-card hover-elevate transition-all">
               <CardHeader>
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                   <f.icon className="h-6 w-6 text-primary" />
@@ -117,7 +117,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Link href="/gift-cards" className="block">
-              <Card className="h-full hover:border-primary/50 transition-colors bg-gradient-to-br from-background to-muted">
+              <Card className="h-full glass-card hover:border-blue-400/30 transition-all">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-4 text-blue-500">
                     <Globe className="h-6 w-6" />
@@ -128,7 +128,7 @@ export default function Home() {
               </Card>
             </Link>
             <Link href="/games" className="block">
-              <Card className="h-full hover:border-primary/50 transition-colors bg-gradient-to-br from-background to-muted">
+              <Card className="h-full glass-card hover:border-purple-400/30 transition-all">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center mb-4 text-purple-500">
                     <Gamepad className="h-6 w-6" />
@@ -139,7 +139,7 @@ export default function Home() {
               </Card>
             </Link>
             <Link href="/esim" className="block">
-              <Card className="h-full hover:border-primary/50 transition-colors bg-gradient-to-br from-background to-muted">
+              <Card className="h-full glass-card hover:border-green-400/30 transition-all">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center mb-4 text-green-500">
                     <Smartphone className="h-6 w-6" />
@@ -150,7 +150,7 @@ export default function Home() {
               </Card>
             </Link>
             <Link href="/vpn" className="block">
-              <Card className="h-full hover:border-primary/50 transition-colors bg-gradient-to-br from-background to-muted border-primary/20">
+              <Card className="h-full glass-card hover:border-primary/40 transition-all">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 text-primary">
                     <Shield className="h-6 w-6" />
