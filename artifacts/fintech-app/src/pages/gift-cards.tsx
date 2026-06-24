@@ -149,7 +149,7 @@ export default function GiftCards() {
                 ))
               ) : filteredCards?.length ? (
                 filteredCards.map(card => (
-                  <Card key={card.id} className="glass-card flex flex-col hover-elevate transition-all overflow-hidden">
+                  <Card key={card.id} className="flex flex-col hover-elevate transition-all overflow-hidden border-border/50">
                     <div className="h-36 w-full relative overflow-hidden rounded-t-xl">
                       <BrandCard name={card.name} />
                       <div className="absolute top-2 right-2 text-2xl">{card.countryFlag}</div>

@@ -112,7 +112,7 @@ export default function VpnPage() {
             {plans?.map((plan) => (
               <Card
                 key={plan.id}
-                className={`glass-card relative flex flex-col transition-all hover-elevate ${plan.popular ? "scale-105 shadow-2xl shadow-primary/20" : ""}`}
+                className={`relative flex flex-col border bg-gradient-to-br transition-all hover-elevate ${colorMap[plan.color] ?? ""} ${plan.popular ? "scale-105 shadow-xl" : ""}`}
               >
                 {plan.popular && (
                   <div className="absolute -top-3 left-0 right-0 flex justify-center">
@@ -182,7 +182,7 @@ export default function VpnPage() {
               { icon: Globe,  title: "110 стран",                   desc: "Обходите любые блокировки. Netflix, ChatGPT, Discord — всё доступно." },
               { icon: Shield, title: "Kill Switch",                  desc: "Автоматически блокирует интернет при обрыве VPN-соединения." },
             ].map((item) => (
-              <Card key={item.title} className="glass-card hover-elevate">
+              <Card key={item.title} className="bg-muted/20 border-border/50 hover-elevate">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
                     <item.icon className="h-6 w-6 text-primary" />

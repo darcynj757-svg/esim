@@ -40,15 +40,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Animated background blobs — fixed, behind everything */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="blob-1 absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full bg-blue-600/28 blur-[100px]" />
-        <div className="blob-2 absolute top-1/3 -right-40 w-[600px] h-[600px] rounded-full bg-teal-500/22 blur-[90px]" />
-        <div className="blob-3 absolute -bottom-40 left-1/3 w-[600px] h-[600px] rounded-full bg-cyan-600/18 blur-[100px]" />
-        <div className="blob-1 absolute top-1/2 right-1/4 w-[400px] h-[400px] rounded-full bg-amber-500/12 blur-[80px]" style={{ animationDuration: "26s", animationDelay: "-8s" }} />
-        <div className="blob-2 absolute bottom-1/4 -left-20 w-[350px] h-[350px] rounded-full bg-indigo-600/18 blur-[80px]" style={{ animationDelay: "-12s" }} />
-      </div>
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/40 backdrop-blur-xl supports-[backdrop-filter]:bg-background/30">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
