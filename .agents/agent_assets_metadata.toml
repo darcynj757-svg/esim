@@ -18,3 +18,15 @@ id = "S9sI8QEiSycndHBTVSSJb"
 uri = "file://artifacts/mockup-sandbox/public/images/bg-aurora.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "NtnGjmdATQ3Fa8jF7m6xd"
+uri = "file://artifacts/fintech-app/public/hero-card.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "2EAjMdj8FetJ_yGnPpy_t"
+uri = "file://artifacts/fintech-app/public/hero-phone.png"
+type = "image"
+title = "generated_image"
