@@ -3,30 +3,86 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { SiNetflix, SiSpotify, SiSteam, SiApple, SiGoogleplay, SiEpicgames, SiNotion, SiBookingdotcom, SiYoutube, SiOpenai } from "react-icons/si";
-import { ArrowRight, CreditCard, Globe, ShieldCheck, Zap, Gamepad, Smartphone, Shield } from "lucide-react";
+import { SiNetflix, SiSpotify, SiSteam, SiApple, SiGoogleplay, SiEpicgames, SiNotion, SiYoutube, SiOpenai, SiBookingdotcom } from "react-icons/si";
+import { ArrowRight, CreditCard, Globe, ShieldCheck, Zap, Gamepad, Smartphone, Shield, Network } from "lucide-react";
+
+const faqs = [
+  { q: "Как быстро я получу карту после оплаты?", a: "Виртуальная карта выпускается моментально. Сразу после успешной оплаты в личном кабинете появятся реквизиты карты, и вы сможете начать ей пользоваться." },
+  { q: "Где я могу расплачиваться вашей картой?", a: "Картой можно расплачиваться в любых зарубежных интернет-магазинах и сервисах, которые принимают Visa/Mastercard. Например: Netflix, Spotify, Steam, Airbnb, Booking, Amazon, Google Play, App Store и многих других." },
+  { q: "Можно ли привязать карту к Apple Pay или Google Pay?", a: "Да, наши пластиковые и некоторые виртуальные карты (зависит от тарифа) можно привязать к Apple Pay, Google Pay и Samsung Pay для бесконтактной оплаты в зарубежных поездках." },
+  { q: "Как пополнить виртуальную карту?", a: "Пополнить баланс можно с любой российской банковской карты через СБП (без комиссии) или криптовалютой (USDT TRC20). Средства зачисляются мгновенно." },
+  { q: "Есть ли скрытые комиссии за обслуживание?", a: "Нет. Вы платите только за выпуск карты (единоразово) и комиссию за пополнение. Абонентской платы за обслуживание виртуальных карт нет." },
+  { q: "Что делать, если оплата не проходит?", a: "Некоторые сервисы могут отклонять карты определённых регионов. В таких случаях рекомендуем использовать VPN. Если проблема не решится, наша поддержка поможет разобраться или вернёт деньги." },
+  { q: "Можно ли выводить средства с карты обратно?", a: "Да, вы можете вывести остаток средств на карту РФ или в USDT в любое время через личный кабинет. Вывод занимает от 15 минут до 24 часов." },
+];
+
+const mainFeatures = [
+  { icon: Zap, title: "Моментальный выпуск", desc: "Карта готова к использованию сразу после оформления" },
+  { icon: ShieldCheck, title: "Безопасные платежи", desc: "Все транзакции защищены протоколами Visa/Mastercard" },
+  { icon: Globe, title: "Оплата по всему миру", desc: "Работает с подавляющим большинством зарубежных сервисов" },
+  { icon: CreditCard, title: "Удобное пополнение", desc: "Карты РФ, СБП или криптовалюта" },
+];
+
+const services = [
+  {
+    href: "/gift-cards",
+    icon: Globe,
+    iconColor: "text-blue-500",
+    iconBg: "bg-blue-500/10",
+    title: "Gift-карты",
+    desc: "Коды пополнения iTunes, PSN, Xbox, Netflix и сотен других сервисов разных регионов.",
+  },
+  {
+    href: "/games",
+    icon: Gamepad,
+    iconColor: "text-purple-500",
+    iconBg: "bg-purple-500/10",
+    title: "Пополнение Steam",
+    desc: "Прямое пополнение аккаунтов Steam (СНГ, Турция, Казахстан) по логину с минимальной комиссией.",
+  },
+  {
+    href: "/esim",
+    icon: Smartphone,
+    iconColor: "text-green-500",
+    iconBg: "bg-green-500/10",
+    title: "Туристические eSIM",
+    desc: "Интернет в 150+ странах мира без физической сим-карты и переплат за роуминг.",
+  },
+  {
+    href: "/vpn",
+    icon: Shield,
+    iconColor: "text-primary",
+    iconBg: "bg-primary/10",
+    title: "UniVPN",
+    desc: "Собственный VPN-сервис: 7000+ серверов в 110 странах, без логов, от 390 ₽/мес.",
+    badge: "Новый",
+  },
+  {
+    href: "/proxy",
+    icon: Network,
+    iconColor: "text-orange-500",
+    iconBg: "bg-orange-500/10",
+    title: "Прокси-серверы",
+    desc: "Резидентские и датацентровые прокси в 100+ странах. HTTP, SOCKS5, ротация IP.",
+    badge: "Новый",
+  },
+];
+
+function Badge({ className, children, ...props }: any) {
+  return (
+    <div
+      className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${className}`}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function Home() {
-  const faqs = [
-    { q: "Как быстро я получу карту после оплаты?", a: "Виртуальная карта выпускается моментально. Сразу после успешной оплаты в личном кабинете появятся реквизиты карты, и вы сможете начать ей пользоваться." },
-    { q: "Где я могу расплачиваться вашей картой?", a: "Картой можно расплачиваться в любых зарубежных интернет-магазинах и сервисах, которые принимают Visa/Mastercard. Например: Netflix, Spotify, Steam, Airbnb, Booking, Amazon, Google Play, App Store и многих других." },
-    { q: "Можно ли привязать карту к Apple Pay или Google Pay?", a: "Да, наши пластиковые и некоторые виртуальные карты (зависит от тарифа) можно привязать к Apple Pay, Google Pay и Samsung Pay для бесконтактной оплаты в зарубежных поездках." },
-    { q: "Как пополнить виртуальную карту?", a: "Пополнить баланс можно с любой российской банковской карты через СБП (без комиссии) или криптовалютой (USDT TRC20). Средства зачисляются мгновенно." },
-    { q: "Есть ли скрытые комиссии за обслуживание?", a: "Нет. Вы платите только за выпуск карты (единоразово) и комиссию за пополнение. Абонентской платы за обслуживание виртуальных карт нет." },
-    { q: "Что делать, если оплата не проходит?", a: "Некоторые сервисы могут отклонять карты определенных регионов. В таких случаях рекомендуем использовать VPN. Если проблема не решится, наша поддержка поможет разобраться или вернет деньги." },
-    { q: "Можно ли выводить средства с карты обратно?", a: "Да, вы можете вывести остаток средств на карту РФ или в USDT в любое время через личный кабинет. Вывод занимает от 15 минут до 24 часов." },
-  ];
-
-  const features = [
-    { icon: Zap, title: "Моментальный выпуск", desc: "Карта готова к использованию сразу после оформления" },
-    { icon: ShieldCheck, title: "Безопасные платежи", desc: "Все транзакции защищены протоколами Visa/Mastercard" },
-    { icon: Globe, title: "Оплата по всему миру", desc: "Работает с подавляющим большинством зарубежных сервисов" },
-    { icon: CreditCard, title: "Удобное пополнение", desc: "Карты РФ, СБП или криптовалюта" }
-  ];
-
   return (
     <Layout>
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative overflow-hidden bg-background pt-24 pb-32 border-b">
         <div className="absolute inset-0 bg-grid-slate-200/20 [mask-image:linear-gradient(to_bottom,white,transparent)] dark:bg-grid-slate-800/20" />
         <div className="absolute inset-0 flex items-center justify-center">
@@ -37,10 +93,13 @@ export default function Home() {
             Работаем с картами РФ и СБП
           </Badge>
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 max-w-4xl mx-auto leading-tight">
-            Оплачивайте зарубежные сервисы <span className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">без ограничений</span>
+            Оплачивайте зарубежные сервисы{" "}
+            <span className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+              без ограничений
+            </span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            Моментальный выпуск виртуальных карт, пополнение Steam, покупка Gift-карт и eSIM. Ваш надежный мост в мировую финансовую систему.
+            Моментальный выпуск виртуальных карт, пополнение Steam, покупка Gift-карт и eSIM. Ваш надёжный мост в мировую финансовую систему.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href="/cards">
@@ -58,7 +117,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Logos */}
+      {/* Brand logos */}
       <section className="py-16 bg-muted/30 border-b">
         <div className="container mx-auto px-4">
           <p className="text-center text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-8">
@@ -86,7 +145,7 @@ export default function Home() {
           <p className="text-muted-foreground text-lg">Мы создали сервис, который решает реальные проблемы</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((f, i) => (
+          {mainFeatures.map((f, i) => (
             <Card key={i} className="bg-muted/20 border-border/50 hover-elevate transition-all">
               <CardHeader>
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
@@ -108,62 +167,38 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Не только карты</h2>
-              <p className="text-muted-foreground text-lg max-w-xl">Прямые пополнения, подарочные карты и eSIM для путешествий в едином интерфейсе</p>
+              <p className="text-muted-foreground text-lg max-w-xl">
+                Прямые пополнения, подарочные карты, eSIM и прокси-серверы в едином интерфейсе
+              </p>
             </div>
             <Link href="/gift-cards">
               <Button variant="outline" className="hidden md:flex">Все сервисы</Button>
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Link href="/gift-cards" className="block">
-              <Card className="h-full hover:border-primary/50 transition-colors bg-gradient-to-br from-background to-muted">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-4 text-blue-500">
-                    <Globe className="h-6 w-6" />
-                  </div>
-                  <CardTitle>Gift-карты</CardTitle>
-                  <CardDescription>Коды пополнения iTunes, PSN, Xbox, Netflix и сотен других сервисов разных регионов.</CardDescription>
-                </CardHeader>
-              </Card>
-            </Link>
-            <Link href="/games" className="block">
-              <Card className="h-full hover:border-primary/50 transition-colors bg-gradient-to-br from-background to-muted">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center mb-4 text-purple-500">
-                    <Gamepad className="h-6 w-6" />
-                  </div>
-                  <CardTitle>Пополнение Steam</CardTitle>
-                  <CardDescription>Прямое пополнение аккаунтов Steam (СНГ, Турция, Казахстан) по логину с минимальной комиссией.</CardDescription>
-                </CardHeader>
-              </Card>
-            </Link>
-            <Link href="/esim" className="block">
-              <Card className="h-full hover:border-primary/50 transition-colors bg-gradient-to-br from-background to-muted">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center mb-4 text-green-500">
-                    <Smartphone className="h-6 w-6" />
-                  </div>
-                  <CardTitle>Туристические eSIM</CardTitle>
-                  <CardDescription>Интернет в 150+ странах мира без физической сим-карты и переплат за роуминг.</CardDescription>
-                </CardHeader>
-              </Card>
-            </Link>
-            <Link href="/vpn" className="block">
-              <Card className="h-full hover:border-primary/50 transition-colors bg-gradient-to-br from-background to-muted border-primary/20">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 text-primary">
-                    <Shield className="h-6 w-6" />
-                  </div>
-                  <CardTitle className="flex items-center gap-2">
-                    UniVPN
-                    <span className="text-xs font-normal px-1.5 py-0.5 rounded bg-primary/10 text-primary">Новый</span>
-                  </CardTitle>
-                  <CardDescription>Собственный VPN-сервис: 7000+ серверов в 110 странах, без логов, от 390 ₽/мес.</CardDescription>
-                </CardHeader>
-              </Card>
-            </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {services.map((s) => (
+              <Link key={s.href} href={s.href} className="block">
+                <Card className="h-full hover:border-primary/50 transition-colors bg-gradient-to-br from-background to-muted">
+                  <CardHeader>
+                    <div className={`w-12 h-12 rounded-full ${s.iconBg} flex items-center justify-center mb-4 ${s.iconColor}`}>
+                      <s.icon className="h-6 w-6" />
+                    </div>
+                    <CardTitle className="flex items-center gap-2 flex-wrap">
+                      {s.title}
+                      {s.badge && (
+                        <span className="text-xs font-normal px-1.5 py-0.5 rounded bg-primary/10 text-primary">
+                          {s.badge}
+                        </span>
+                      )}
+                    </CardTitle>
+                    <CardDescription>{s.desc}</CardDescription>
+                  </CardHeader>
+                </Card>
+              </Link>
+            ))}
           </div>
+
           <div className="mt-8 text-center md:hidden">
             <Link href="/gift-cards">
               <Button variant="outline" className="w-full">Все сервисы</Button>
@@ -178,14 +213,11 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Частые вопросы</h2>
           <p className="text-muted-foreground text-lg">Отвечаем на самые популярные вопросы о нашем сервисе</p>
         </div>
-        
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, i) => (
             <AccordionItem key={i} value={`item-${i}`}>
               <AccordionTrigger className="text-left font-medium text-lg">{faq.q}</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed">
-                {faq.a}
-              </AccordionContent>
+              <AccordionContent className="text-muted-foreground leading-relaxed">{faq.a}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
@@ -207,14 +239,5 @@ export default function Home() {
         </div>
       </section>
     </Layout>
-  );
-}
-
-// Inline Badge component specifically for this page since we don't have the ui/badge ready yet
-function Badge({ className, children, ...props }: any) {
-  return (
-    <div className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${className}`} {...props}>
-      {children}
-    </div>
   );
 }

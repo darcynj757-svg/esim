@@ -12,6 +12,7 @@ import reviewsRouter from "./reviews";
 import ordersRouter from "./orders";
 import dashboardRouter from "./dashboard";
 import vpnRouter from "./vpn";
+import proxyRouter from "./proxy";
 
 const router: IRouter = Router();
 
@@ -28,5 +29,6 @@ router.use(reviewsRouter);
 router.use(ordersRouter);
 router.use(dashboardRouter);
 router.use(vpnRouter);
+router.use(proxyRouter);
 
 export default router;
